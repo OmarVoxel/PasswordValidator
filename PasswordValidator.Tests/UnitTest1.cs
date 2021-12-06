@@ -61,5 +61,19 @@ namespace PasswordValidator.Tests
             result.IsValid.Should().Be(isValid);
             result.Message.Should().Be(message);
         }
+        
+        [Theory]
+        [InlineData("aaaaaaSd32", false, "The password must contain at least one capital letter")] 
+        [InlineData("aaaaSaaaa22aa", false, "The password must contain at least one capital letter")]
+        [InlineData("daaaaaaSa33da", false, "The password must contain at least one capital letter")]
+        public void ContainAtLeastOneSpecialCharacter(string pass, bool isValid, string message)
+        {
+            PasswordValidator password = new(pass);
+            
+            ValidationResult result = password.Validation();
+            
+            result.IsValid.Should().Be(isValid);
+            result.Message.Should().Be(message);
+        }
     }
 }
