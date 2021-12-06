@@ -9,7 +9,7 @@ namespace PasswordValidator.Tests
         [Theory]
         [InlineData("1234", false, "Password must be at least 8 characters")] 
         [InlineData("123456", false, "Password must be at least 8 characters")]
-        [InlineData("adssd", false, "Password must be at least 8 characters")]
+        [InlineData("ads12sd", false, "Password must be at least 8 characters")]
         public void BeAtLeast8OrMoreCharacters(string pass, bool isValid, string message)
         {
             PasswordValidator password = new(pass);
@@ -22,9 +22,9 @@ namespace PasswordValidator.Tests
         
         
         [Theory]
-        [InlineData("aaaaaaad2", false, "The password must contain at least 2 number")] 
-        [InlineData("aaaaaaaaaaa", false, "The password must contain at least 2 number")]
-        [InlineData("daaaaaaaada", false, "The password must contain at least 2 number")]
+        [InlineData("aaaaaaad2", false, "The password must contain at least 2 numbers")] 
+        [InlineData("aaaaaaaaaaa", false, "The password must contain at least 2 numbers")]
+        [InlineData("daaaaaaaada", false, "The password must contain at least 2 numbers")]
         public void ContainAtLeast2Numbers(string pass, bool isValid, string message)
         {
             PasswordValidator password = new(pass);
@@ -36,8 +36,8 @@ namespace PasswordValidator.Tests
         }
         
         [Theory]
-        [InlineData("aaaaaaad2", false, "Password must be at least 8 characters\nThe password must contain at least 2 numbers")] 
-        [InlineData("aaaaaaaaaaa", false, "Password must be at least 8 characters\nThe password must contain at least 2 numbers")]
+        [InlineData("aad2", false, "Password must be at least 8 characters\nThe password must contain at least 2 numbers")] 
+        [InlineData("ss2", false, "Password must be at least 8 characters\nThe password must contain at least 2 numbers")]
         public void BeAtLeast8OrMoreCharactersAndContainAtLeast2Numbers(string pass, bool isValid, string message)
         {
             PasswordValidator password = new(pass);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace PasswordValidator
@@ -18,15 +19,18 @@ namespace PasswordValidator
         
         public ValidationResult Validation()
         {
+            List<string> message = new List<string>();
+            
             if (_password.Length < 8)
-                return NotValidPassword("Password must be at least 8 characters");
+                message.Add("Password must be at least 8 characters");
 
             if (_password.Count(char.IsDigit) < 2)
-                return NotValidPassword("The password must contain at least 2 number");
+                message.Add("The password must contain at least 2 numbers");
 
+            if (message.Any())
+                return NotValidPassword(message.Aggregate((a,b) => a + "\n" + b));
+            
             return CorrectPassword();
-            
-            
         }
     }
 
