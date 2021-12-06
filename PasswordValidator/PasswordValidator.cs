@@ -7,12 +7,20 @@ namespace PasswordValidator
         private readonly string _password;
 
         public PasswordValidator(string password)
-        {   
-            _password = password;
-        }
+            => _password = password;
+
+        private ValidationResult CorrectPassword()
+            => new ValidationResult(true, null);
+
+        private ValidationResult NotValidPassword(string message)
+            => new ValidationResult(false, message);
+        
         public ValidationResult Validation()
         {
-            return new ValidationResult(_password.Length >= 8, "Password must be at least 8 characters");
+            if (_password.Length >= 8)
+                return CorrectPassword();
+            
+            return NotValidPassword("Password must be at least 8 characters");
         }
     }
 
@@ -26,5 +34,6 @@ namespace PasswordValidator
             IsValid = isValid;
             Message = message;
         }
+        
     }
 }

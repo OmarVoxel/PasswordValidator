@@ -10,14 +10,15 @@ namespace PasswordValidator.Tests
         [InlineData("1234", false, "Password must be at least 8 characters")] 
         [InlineData("123456", false, "Password must be at least 8 characters")]
         [InlineData("adssd", false, "Password must be at least 8 characters")]
-        public void BeAtLeast8OrMoreCharacters(string pass, bool isValid, string Message)
+        public void BeAtLeast8OrMoreCharacters(string pass, bool isValid, string message)
         {
             PasswordValidator password = new(pass);
             
             ValidationResult result = password.Validation();
             
             result.IsValid.Should().Be(isValid);
-            result.Message.Should().Be(Message);
+            result.Message.Should().Be(message);
         }
+        
     }
 }
