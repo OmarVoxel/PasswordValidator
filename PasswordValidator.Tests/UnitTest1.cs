@@ -35,5 +35,20 @@ namespace PasswordValidator.Tests
             result.Message.Should().Be(message);
         }
         
+        [Theory]
+        [InlineData("aaaaaaad2", false, "Password must be at least 8 characters\nThe password must contain at least 2 numbers")] 
+        [InlineData("aaaaaaaaaaa", false, "Password must be at least 8 characters\nThe password must contain at least 2 numbers")]
+        public void BeAtLeast8OrMoreCharactersAndContainAtLeast2Numbers(string pass, bool isValid, string message)
+        {
+            PasswordValidator password = new(pass);
+            
+            ValidationResult result = password.Validation();
+            
+            result.IsValid.Should().Be(isValid);
+            result.Message.Should().Be(message);
+        }
+
+        
+        
     }
 }
