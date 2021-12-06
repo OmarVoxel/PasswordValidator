@@ -20,5 +20,20 @@ namespace PasswordValidator.Tests
             result.Message.Should().Be(message);
         }
         
+        
+        [Theory]
+        [InlineData("aad2", false, "The password must contain at least 2 number")] 
+        [InlineData("aaa", false, "The password must contain at least 2 number")]
+        [InlineData("dda", false, "The password must contain at least 2 number")]
+        public void ContainAtLeast2Numbers(string pass, bool isValid, string message)
+        {
+            PasswordValidator password = new(pass);
+            
+            ValidationResult result = password.Validation();
+            
+            result.IsValid.Should().Be(isValid);
+            result.Message.Should().Be(message);
+        }
+        
     }
 }
