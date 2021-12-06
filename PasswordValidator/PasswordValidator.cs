@@ -21,12 +21,15 @@ namespace PasswordValidator
         {
             List<string> message = new List<string>();
             
+            if(_password == _password.ToLower())
+                message.Add("The password must contain at least one capital letter");
+            
             if (_password.Length < 8)
                 message.Add("Password must be at least 8 characters");
 
             if (_password.Count(char.IsDigit) < 2)
                 message.Add("The password must contain at least 2 numbers");
-
+            
             if (message.Any())
                 return NotValidPassword(message.Aggregate((a,b) => a + "\n" + b));
             
