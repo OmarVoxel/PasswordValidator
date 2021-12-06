@@ -22,9 +22,9 @@ namespace PasswordValidator.Tests
         
         
         [Theory]
-        [InlineData("aad2", false, "The password must contain at least 2 number")] 
-        [InlineData("aaa", false, "The password must contain at least 2 number")]
-        [InlineData("dda", false, "The password must contain at least 2 number")]
+        [InlineData("aaaaaaad2", false, "The password must contain at least 2 number")] 
+        [InlineData("aaaaaaaaaaa", false, "The password must contain at least 2 number")]
+        [InlineData("daaaaaaaada", false, "The password must contain at least 2 number")]
         public void ContainAtLeast2Numbers(string pass, bool isValid, string message)
         {
             PasswordValidator password = new(pass);

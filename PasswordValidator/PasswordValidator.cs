@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace PasswordValidator
 {
@@ -17,10 +18,15 @@ namespace PasswordValidator
         
         public ValidationResult Validation()
         {
-            if (_password.Length >= 8)
-                return CorrectPassword();
+            if (_password.Length < 8)
+                return NotValidPassword("Password must be at least 8 characters");
+
+            if (_password.Count(char.IsDigit) < 2)
+                return NotValidPassword("The password must contain at least 2 number");
+
+            return CorrectPassword();
             
-            return NotValidPassword("Password must be at least 8 characters");
+            
         }
     }
 
