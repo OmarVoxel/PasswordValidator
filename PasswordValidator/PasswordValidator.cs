@@ -22,6 +22,11 @@ namespace PasswordValidator
         {
             List<string> message = new List<string>();
             
+            Regex regexPassword = new Regex(@"^[a-zA-Z0-9 ]*$");
+
+            if(regexPassword.IsMatch(_password))
+                message.Add("The password must contain at least one special character");
+
             if(_password == _password.ToLower())
                 message.Add("The password must contain at least one capital letter");
             

@@ -1,4 +1,3 @@
-using System;
 using Xunit;
 using FluentAssertions;
 
@@ -7,9 +6,9 @@ namespace PasswordValidator.Tests
     public class PasswordShould
     {
         [Theory]
-        [InlineData("123A", false, "Password must be at least 8 characters")] 
-        [InlineData("1234S6", false, "Password must be at least 8 characters")]
-        [InlineData("as1D3sd", false, "Password must be at least 8 characters")]
+        [InlineData("#23A", false, "Password must be at least 8 characters")] 
+        [InlineData("1#34S6", false, "Password must be at least 8 characters")]
+        [InlineData("s1D#3sd", false, "Password must be at least 8 characters")]
         public void BeAtLeast8OrMoreCharacters(string pass, bool isValid, string message)
         {
             PasswordValidator password = new(pass);
@@ -22,9 +21,9 @@ namespace PasswordValidator.Tests
         
         
         [Theory]
-        [InlineData("aaaSaaad2", false, "The password must contain at least 2 numbers")] 
-        [InlineData("aaaaSaaaaaaa", false, "The password must contain at least 2 numbers")]
-        [InlineData("daaaaAAaaaada", false, "The password must contain at least 2 numbers")]
+        [InlineData("aaaSaaa-d2", false, "The password must contain at least 2 numbers")] 
+        [InlineData("aaaaSa&aaaaaa", false, "The password must contain at least 2 numbers")]
+        [InlineData("daaaa&AAaaaada", false, "The password must contain at least 2 numbers")]
         public void ContainAtLeast2Numbers(string pass, bool isValid, string message)
         {
             PasswordValidator password = new(pass);
@@ -36,8 +35,8 @@ namespace PasswordValidator.Tests
         }
         
         [Theory]
-        [InlineData("aadS2", false, "Password must be at least 8 characters\nThe password must contain at least 2 numbers")] 
-        [InlineData("ssS2", false, "Password must be at least 8 characters\nThe password must contain at least 2 numbers")]
+        [InlineData("aa&dS2", false, "Password must be at least 8 characters\nThe password must contain at least 2 numbers")] 
+        [InlineData("ss&S2", false, "Password must be at least 8 characters\nThe password must contain at least 2 numbers")]
         public void BeAtLeast8OrMoreCharactersAndContainAtLeast2Numbers(string pass, bool isValid, string message)
         {
             PasswordValidator password = new(pass);
@@ -49,9 +48,9 @@ namespace PasswordValidator.Tests
         }
         
         [Theory]
-        [InlineData("aaaaaad32", false, "The password must contain at least one capital letter")] 
-        [InlineData("aaaaaaaa22aa", false, "The password must contain at least one capital letter")]
-        [InlineData("daaaaaaa33da", false, "The password must contain at least one capital letter")]
+        [InlineData("aa*aaaad32", false, "The password must contain at least one capital letter")] 
+        [InlineData("aa!aaaaaa22aa", false, "The password must contain at least one capital letter")]
+        [InlineData("da!aaaaaa33da", false, "The password must contain at least one capital letter")]
         public void ContainAtLeastOneCapitalLetter(string pass, bool isValid, string message)
         {
             PasswordValidator password = new(pass);
@@ -63,9 +62,9 @@ namespace PasswordValidator.Tests
         }
         
         [Theory]
-        [InlineData("aaaaaaSd32", false, "The password must contain at least one capital letter")] 
-        [InlineData("aaaaSaaaa22aa", false, "The password must contain at least one capital letter")]
-        [InlineData("daaaaaaSa33da", false, "The password must contain at least one capital letter")]
+        [InlineData("aaaaaaSd32", false, "The password must contain at least one special character")] 
+        [InlineData("aaaaSaaaa22aa", false, "The password must contain at least one special character")]
+        [InlineData("daaaaaaSa33da", false, "The password must contain at least one special character")]
         public void ContainAtLeastOneSpecialCharacter(string pass, bool isValid, string message)
         {
             PasswordValidator password = new(pass);
