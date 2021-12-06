@@ -12,7 +12,7 @@ namespace PasswordValidator
         }
         public ValidationResult Validation()
         {
-            return new ValidationResult(true, null);
+            return new ValidationResult(_password.Length >= 8, "Password must be at least 8 characters");
         }
     }
 
